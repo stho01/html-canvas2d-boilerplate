@@ -28,12 +28,26 @@ export class InputManager {
     //** public:
     //********************************************
     
+    /**
+     * 
+     */
     init(): void {
         window.addEventListener("mousedown", this._onMouseDownEventHandler.bind(this));
         window.addEventListener("mouseup", this._onMouseUpEventHandler.bind(this));
         window.addEventListener("mousemove", this._onMouseMoveEventHandler.bind(this));
         window.addEventListener("keydown", this._onKeyDownEventHandler.bind(this));
         window.addEventListener("keyup", this._onKeyUpEventHandler.bind(this)); 
+    }
+
+    /**
+     * 
+     */
+    dispose(): void {
+        window.removeEventListener("mousedown", this._onMouseDownEventHandler.bind(this));
+        window.removeEventListener("mouseup", this._onMouseUpEventHandler.bind(this));
+        window.removeEventListener("mousemove", this._onMouseMoveEventHandler.bind(this));
+        window.removeEventListener("keydown", this._onKeyDownEventHandler.bind(this));
+        window.removeEventListener("keyup", this._onKeyUpEventHandler.bind(this)); 
     }
 
 
