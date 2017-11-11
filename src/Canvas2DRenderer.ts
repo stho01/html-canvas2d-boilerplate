@@ -52,6 +52,11 @@ export class Canvas2DRenderer {
         this._ctx.stroke();
     }
 
+    /**
+     * 
+     * @param l 
+     * @param color 
+     */
     public renderDirLine(l: Line, color: string = "red"): void {
         this.renderLine(l);
         let c: Circle = new Circle(l.p2.x, l.p2.y, 10);

@@ -6,18 +6,30 @@ import { Point } from "../math/point";
 import { Circle } from "../geometry/circle";
 
 export class GameScene implements IState<Game> {
-
+    
     private _pos: Vector2D;
-
+    
     init(game: Game): void {
         console.log("Game scene initialized");
+    }
+
+    resume(entity: Game): void {
+        // Resume is called when this state is pushed on top of the state stack. 
+    }
+
+    pause(entity: Game): void {
+        // Pause is called if the current state is changed 
+    }
+
+    dispose(ebtity: Game): void {
+        // Dispose scene is called if the state is being removed from the history stack.
     }
     
     update(dt: number, game: Game) {
         let mp: Point = game.input.getMousePosition();
         this._pos = new Vector2D(mp.x,mp.y);
     }
-
+    
     render(dt: number, game: Game) {
         game.renderer.renderText("stho's html canvas boilerplate", this._pos);
     }

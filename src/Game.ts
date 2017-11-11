@@ -70,7 +70,7 @@ export class Game {
 
         // set initial scene
         let initialScene: IState<Game> = new GameScene();
-        this._sceneManager.setCurrent(initialScene);
+        this._sceneManager.push(initialScene);
 
         return this;
     }

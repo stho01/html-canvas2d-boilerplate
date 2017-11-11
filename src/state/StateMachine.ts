@@ -1,24 +1,18 @@
 import { IState } from "./state";
 import { Canvas2DRenderer } from "../canvas2drenderer";
 
-export interface StateMachineOptions {
-    maxHistoryLenght?: number;
-}
-
-let _defaultOptions: StateMachineOptions = {
-    maxHistoryLenght: 10
-}
-
+/**
+ * A state machine for handeling states.
+ */
 export class StateMachine<T> {
 
     //********************************************
     //** attributes:
     //********************************************
     
-    private _options      : StateMachineOptions;
-    private _currentState : IState<T>;
-    private _historyStack : IState<T>[] = [];
-    private readonly _entity       : T;
+    private _options            : StateMachineOptions;
+    private _stateStack         : IState<T>[] = [];
+    private readonly _entity    : T;
 
     //********************************************
     //**ctor:
@@ -39,9 +33,17 @@ export class StateMachine<T> {
      * 
      * @param state 
      */
-    setCurrent(state: IState<T>): void {
-        this._currentState = state;
-        this._currentState.init(this._entity);
+    push(state: IState<T>): void {
+        if(state == null) {
+            throw new Error("Cannot push null or undefinde to state stack");
+        }
+
+        if (this._stateStack.length > 0) {
+            this.peek().pause(this._entity);
+        }
+
+        this._stateStack.push(state);
+        state.init(this._entity);
     }
 
     /**
@@ -49,14 +51,26 @@ export class StateMachine<T> {
      * 
      * @param state 
      */
-    setCurrentAndClearHistory(state: IState<T>): void {
+    pushAndClearHistory(state: IState<T>): void {
         if (state == null) {
             throw new Error("State cannot be null or undefined");
         }
 
-        this._historyStack = [];
-        this._currentState = state;
-        this._currentState.init(this._entity);
+        this._stateStack = [];
+        this._stateStack.push(state);
+        state.init(this._entity)
+    }
+
+    /**
+     * Returns the first element in the stack without 
+     * removing it.
+     */
+    peek(): IState<T> {
+        if(this._stateStack.length === 0) {
+            return null;
+        }
+
+        return this._stateStack[this._stateStack.length-1];
     }
     
     /**
@@ -65,38 +79,29 @@ export class StateMachine<T> {
      * @param states 
      */
     setHistory(states: IState<T>[]): void {
-        this._historyStack = states.slice(0, this._options.maxHistoryLenght);
-    }
-
-
-    /**
-     * 
-     * @param state 
-     */
-    change(state: IState<T>): void {
-        if (state == null) {
-            throw new Error("State cannot be null or undefined");
-        }
-        
-        if (this._currentState != null) {
-            this._historyStack.push(this._currentState);
-        }
-        if (this._historyStack.length > this._options.maxHistoryLenght) {
-            this._historyStack.unshift(); // remove bottom state of stack.
+        if (states == null) {
+            throw new Error("Cannot set history state collection is null or undefined");
         }
 
-        this._currentState = state;
-        this._currentState.init(this._entity);
+        this._stateStack = states.slice(0, this._options.maxHistoryLenght);
     }
 
     /**
      * Pops the current state off the top off the history stack
+     * and calls resume on next state in the stack.
      */
     pop(): IState<T> {
-        if (this._historyStack.length <= 0) {
+        if (this._stateStack.length <= 0) {
             return null;
         }
-        return this._historyStack.pop();
+        
+        let removed = this._stateStack.pop();
+        let top = this.peek();
+        if (top != null) {
+            top.resume(this._entity);
+        }
+
+        return removed;
     }
 
     /**
@@ -105,8 +110,9 @@ export class StateMachine<T> {
      * @param dt 
      */
     update(dt: number): void {
-        if(this._currentState != null) {
-            this._currentState.update(dt, this._entity);
+        let top: IState<T> = this.peek();
+        if(top != null) {
+            top.update(dt, this._entity);
         }
     }
 
@@ -117,8 +123,19 @@ export class StateMachine<T> {
      * @param renderer 
      */
     render(dt: number): void {
-        if (this._currentState != null) {
-            this._currentState.render(dt, this._entity);
+        let top: IState<T> = this.peek();
+        if (top != null) {
+            top.render(dt, this._entity);
         }
     }
+}
+
+
+export interface StateMachineOptions {
+    maxHistoryLenght?: number;
+}
+
+
+let _defaultOptions: StateMachineOptions = {
+    maxHistoryLenght: 10
 }
