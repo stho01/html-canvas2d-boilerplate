@@ -1,15 +1,14 @@
-"use strict";
-
-import { IState } from "../state/state";
-import { Game } from "../game";
-import { Canvas2DRenderer } from "../canvas2drenderer";
-import { Vector2D } from "../math/vector2d";
-import { Point } from "../math/point";
-import { Circle } from "../geometry/circle";
+import { IState } from "./../state/State";
+import { Game } from "./../Game";
+import { Canvas2DRenderer } from "./../Canvas2DRenderer";
+import { Vector2D } from "./../math/Vector2D";
+import { Point } from "./../math/Point";
+import { Circle } from "./../geometry/Circle";
 
 export class GameScene implements IState<Game> {
+    "use strict";
     
-    private _pos: Vector2D;
+    private _pos: Vector2D; 
     
     init(game: Game): void {
         console.log("Game scene initialized");
@@ -34,5 +33,6 @@ export class GameScene implements IState<Game> {
     
     render(dt: number, game: Game) {
         game.renderer.renderText("stho's html canvas boilerplate", this._pos);
+        
     }
 } 

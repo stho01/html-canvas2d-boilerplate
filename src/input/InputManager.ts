@@ -1,10 +1,9 @@
-"use strict";
-
-import { Point } from '../math/point';
-import { MouseButtonCode } from './mousebuttoncode';
-import { KeyCode } from "./keycode";
+import { Point } from './../math/Point';
+import { MouseButtonCode } from './MouseButtonCode';
+import { KeyCode } from "./KeyCode";
 
 export class InputManager {
+    "use strict";
     
     //********************************************
     //** attributes:

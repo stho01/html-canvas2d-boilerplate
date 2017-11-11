@@ -1,10 +1,9 @@
-"use strict";
-
-import { Point } from "../math/point";
-import { Vector2D } from "../math/vector2d";
+import { Point } from "./../math/point";
+import { Vector2D } from "./../math/Vector2D";
 
 export class Line {
-    
+    "use strict";
+
     //********************************************
     //** attributes:
     //********************************************

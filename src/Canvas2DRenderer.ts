@@ -1,17 +1,29 @@
-"use strict";
-
-import { Circle } from "./geometry/circle";
-import { Line } from "./geometry/line";
-import { Vector2D } from "./math/vector2d";
+import { Rectangle } from './geometry/Rectangle';
+import { Circle } from "./geometry/Circle";
+import { Line } from "./geometry/Line";
+import { Vector2D } from "./math/Vector2D";
 
 export class Canvas2DRenderer {
+    "use strict";
 
+    //********************************************
+    //** attributes:
+    //********************************************
+    
     private readonly _ctx: CanvasRenderingContext2D;
-
+    
+    //********************************************
+    //** ctor:
+    //********************************************
+    
     constructor(canvas: HTMLCanvasElement) {
         this._ctx = canvas.getContext("2d");
     }
-
+    
+    //********************************************
+    //** public:
+    //********************************************
+    
     /**
      * 
      * @param x 
@@ -20,10 +32,10 @@ export class Canvas2DRenderer {
      * @param h 
      * @param colorStyle 
      */
-    public renderRect(x: number, y: number, w: number, h: number, colorStyle: string = "gray"): void {
+    public renderRect(rect: Rectangle, colorStyle: string = "gray"): void {
         this._ctx.fillStyle = colorStyle;
         this._ctx.beginPath();
-        this._ctx.rect(x, y, w, h);
+        this._ctx.rect(rect.x, rect.y, rect.width, rect.heigth);
         this._ctx.fill();
     }
 

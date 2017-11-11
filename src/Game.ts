@@ -1,23 +1,14 @@
-"use strict";
-
-import { Canvas2DRenderer } from "./canvas2drenderer";
-import { InputManager } from "./input/inputmanger";
-import { IState } from "./state/state";
+import { Rectangle } from './geometry/Rectangle';
+import { Canvas2DRenderer } from "./Canvas2DRenderer";
+import { InputManager } from "./input/InputManager";
+import { IState } from "./state/State";
 import { StateMachine } from "./state/StateMachine";
 import { ViewPort } from "./types/ViewPort";
 import { GameScene } from "./scenes/GameScene";
 
-export interface GameOptions {
-    clearColor?: string;
-}
-
-let _defaultOptions: GameOptions = {
-    clearColor: "#000000"
-}
-
-
 export class Game {
-    
+    "use strict";
+
     /**
      * Game intance. 
      */
@@ -126,7 +117,16 @@ export class Game {
      * @param dt  
      */
     private _render(dt: number): void {
-        this._renderer.renderRect(0, 0, this._viewPort.width, this._viewPort.height, this._options.clearColor);
+        let clearRect: Rectangle = new Rectangle(0, 0, this._viewPort.width, this._viewPort.height);
+        this._renderer.renderRect(clearRect, this._options.clearColor);
         this._sceneManager.render(dt);
     }
+}
+
+export interface GameOptions {
+    clearColor?: string;
+}
+
+let _defaultOptions: GameOptions = {
+    clearColor: "#000000"
 }

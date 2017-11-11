@@ -1,6 +1,5 @@
-"use strict";
-
 export class Vector2D {
+    "use strict";
     
     //********************************************
     //** read only attributes. 

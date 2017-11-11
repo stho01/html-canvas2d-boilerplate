@@ -1,7 +1,4 @@
-"use strict";
-
-import { Game } from "./game";
-import { InputManager } from "./input/inputmanger";
+import { Game } from "./Game";
 
 Game.Instance.init({
     clearColor: "wheat"

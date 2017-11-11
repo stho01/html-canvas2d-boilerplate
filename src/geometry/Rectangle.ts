@@ -1,8 +1,8 @@
-"use strict";
-
-import { Vector2D } from './../math/Vector2d';
+import { Vector2D } from './../math/Vector2D';
 
 export class Rectangle {
+    "use strict";
+
     //********************************************
     //** attributes:
     //********************************************
@@ -30,5 +30,4 @@ export class Rectangle {
     get y()         : number   { return this._pos.y; }
     get width()     : number   { return this._width; }
     get heigth()    : number   { return this._height; }
-
 }

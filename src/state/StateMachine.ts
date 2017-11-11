@@ -1,12 +1,11 @@
-"use strict";
-
-import { IState } from "./state";
-import { Canvas2DRenderer } from "../canvas2drenderer";
+import { Canvas2DRenderer } from './../Canvas2DRenderer';
+import { IState } from "./State";
 
 /**
  * A state machine for handeling states.
  */
 export class StateMachine<T> {
+    "use strict";
 
     //********************************************
     //** attributes:
