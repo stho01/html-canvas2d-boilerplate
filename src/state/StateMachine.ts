@@ -1,3 +1,5 @@
+"use strict";
+
 import { IState } from "./state";
 import { Canvas2DRenderer } from "../canvas2drenderer";
 

@@ -1,3 +1,5 @@
+"use strict";
+
 import { Game } from "./game";
 import { InputManager } from "./input/inputmanger";
 

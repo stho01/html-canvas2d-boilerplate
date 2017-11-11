@@ -1,3 +1,5 @@
+"use strict";
+
 import { Point } from '../math/point';
 import { MouseButtonCode } from './mousebuttoncode';
 import { KeyCode } from "./keycode";

@@ -1,3 +1,5 @@
+"use strict";
+
 import { Circle } from "./geometry/circle";
 import { Line } from "./geometry/line";
 import { Vector2D } from "./math/vector2d";

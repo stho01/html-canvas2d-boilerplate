@@ -1,3 +1,4 @@
+"use strict";
 
 export enum KeyCode  {
     // Special keys
