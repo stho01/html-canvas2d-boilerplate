@@ -14,8 +14,6 @@
   "author": "stho",
   "license": "ISC",
   "devDependencies": {
-    "@types/knockout": "^3.4.46",
-    "knockout": "^3.4.2",
     "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
     "webpack": "^3.8.1",
